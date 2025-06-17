@@ -1,0 +1,19 @@
+// Esta es la consulta que se realizó en wiki para obtener el json de los autores 
+// https://query.wikidata.org
+
+SELECT DISTINCT ?author ?authorLabel ?birthDate ?placeOfBirthLabel ?genderLabel ?languageLabel ?occupationLabel ?genreLabel ?description ?image
+WHERE {
+  ?author wdt:P27 wd:Q298;       # nacionalidad chilena
+          wdt:P106 ?occupation;  # ocupación
+          wdt:P21 ?gender;       # género
+          wdt:P19 ?placeOfBirth;
+          wdt:P569 ?birthDate;
+          wdt:P1412 ?language;
+          wdt:P136 ?genre;
+          wdt:P18 ?image.
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
+  ?author schema:description ?description.
+  FILTER(LANG(?description) = "es")
+}
+LIMIT 1000

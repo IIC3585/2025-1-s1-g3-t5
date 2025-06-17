@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const autores = await getCollection("autores");
+  return autores.map((autor) => ({
+    params: { id: String(autor.data.id) },
+  }));
+}
+
+const { params } = Astro;
+const autores = await getCollection("autores");
+const autor = autores.find((a) => a.data.id === Number(params.id));
+
+if (!autor) {
+  throw new Error(`Autor con id "${params.id}" no encontrado.`);
+}
+
+const {
+  name,
+  birthDate,
+  placeOfBirth,
+  gender,
+  country,
+  languages,
+  occupation,
+  genre,
+  image,
+  description,
+} = autor.data;
+
+---
+
+<Layout title={name}>
+  <section class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row gap-8">
+    {image && (
+      <img src={image} alt={`Foto de ${name}`} class="w-full md:w-60 h-auto rounded-lg object-cover shadow-sm" />
+    )}
+    <div class="space-y-4">
+      <h1 class="text-3xl font-bold text-gray-900">{name}</h1>
+      <p class="text-gray-700"><span class="font-semibold">Descripción:</span> {description}</p>
+      <p><span class="font-semibold">Fecha de nacimiento:</span> {birthDate}</p>
+      <p><span class="font-semibold">Lugar de nacimiento:</span> {placeOfBirth}</p>
+      <p><span class="font-semibold">Género:</span> {gender}</p>
+      <p><span class="font-semibold">Nacionalidad:</span> {country}</p>
+      <p><span class="font-semibold">Idiomas:</span> {languages.join(", ")}</p>
+      <p><span class="font-semibold">Ocupaciones:</span> {occupation.join(", ")}</p>
+      <p><span class="font-semibold">Géneros:</span> {genre.join(", ")}</p>
+    </div>
+  </section>
+
+  <div class="mt-8 flex justify-center">
+    <a href="/" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-md hover:bg-blue-700 transition">
+      ← Volver
+    </a>
+  </div>
+</Layout>

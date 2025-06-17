@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const aves = await getCollection("aves");
+  return aves.map((ave) => ({
+    params: { uid: ave.data.uid },
+  }));
+}
+
+const { params } = Astro;
+const aves = await getCollection("aves");
+const ave = aves.find((a) => a.data.uid === params.uid);
+
+if (!ave) {
+  throw new Error(`Ave con uid "${params.uid}" no encontrada.`);
+}
+
+const {
+  spanishName,
+  englishName,
+  latinName,
+  image,
+  size,
+  geo,
+  description,
+  habitat,
+  iucn,
+  didyouknow,
+} = ave.data;
+---
+
+<Layout title={spanishName}>
+  <section class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row gap-8">
+    {image && (
+      <img src={image} alt={`Imagen de ${spanishName}`} class="w-full md:w-64 h-auto object-cover rounded-lg shadow" />
+    )}
+
+    <div class="space-y-2">
+      <h1 class="text-3xl font-bold text-gray-900">{spanishName}</h1>
+      <p><span class="font-semibold">Nombre en inglés:</span> {englishName}</p>
+      <p><span class="font-semibold">Nombre en latín:</span> {latinName}</p>
+      <p><span class="font-semibold">Tamaño:</span> {size}</p>
+      <p><span class="font-semibold">Se encuentra usualmente en:</span> {geo}</p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto mt-6 bg-white rounded-xl p-6 shadow space-y-4">
+    <p><span class="font-semibold">Descripción:</span> {description}</p>
+    <p><span class="font-semibold">Hábitat:</span> {habitat}</p>
+    <p><span class="font-semibold">Estado IUCN:</span> {iucn}</p>
+    <p><span class="font-semibold">¿Sabías que?:</span> {didyouknow}</p>
+  </section>
+
+  <div class="mt-8 flex justify-center">
+    <a href="/aves" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-md hover:bg-blue-700 transition">
+      ← Volver
+    </a>
+  </div>
+</Layout>
