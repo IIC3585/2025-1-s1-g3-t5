@@ -17,3 +17,7 @@ npm run dev
 ## Datos obtenidos:
 - Aves: https://github.com/NinjasCL/chileanbirds-dataset/tree/master/data
 - Personajes: https://query.wikidata.org
+
+## Notas extra
+
+- Se utilizó tailwind-4 para la implementación de estilos y la integración se realizó con ayuda de Chat GPT
