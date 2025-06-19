@@ -2,27 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
+import FiltroAutores from '../components/vue/FiltroAutores.vue';
+
 const autores = await getCollection("autores");
+
+const items = autores;
 ---
 
 <Layout title="Autores Chilenos">
   <h1 class="text-3xl font-bold mb-8 text-center">Personajes Chilenos</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {autores.map((autor) => (
-      <div>
-        <a href={`/autores/${autor.data.id}`}>
-          <article class="rounded-xl border shadow hover:shadow-lg transition bg-white overflow-hidden p-4 text-center">
-            {autor.data.image && (
-              <img
-                src={autor.data.image}
-                alt={`Imagen de ${autor.data.name}`}
-                class="w-full h-48 object-cover rounded-md mb-4"
-              />
-            )}
-            <h2 class="text-lg font-semibold text-gray-900">{autor.data.name}</h2>
-          </article>
-        </a>
-      </div>
-    ))}
-  </div>
+
+  <FiltroAutores client:load items={items} />
+
 </Layout>
