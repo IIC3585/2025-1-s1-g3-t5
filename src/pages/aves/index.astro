@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import FiltroAves from "../../components/vue/FiltroAves.vue";
+import Chatbot from "../../components/ChatbotIsland.svelte"
 
 const aves = await getCollection("aves");
 const items = aves;
@@ -10,8 +11,8 @@ const items = aves;
 <Layout title="Aves Nativas">
   <h1 class="text-3xl font-bold mb-8 text-center">Aves Nativas</h1>
 
-  <!-- Isla Vue con filtro de aves -->
   <FiltroAves client:load items={items} />
+  <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/03twDtrAVdwFFtkGASzQW"/>
 
-  
+
 </Layout>

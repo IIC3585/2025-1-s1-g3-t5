@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 import FiltroAutores from '../components/vue/FiltroAutores.vue';
+import Chatbot from '../components/ChatbotIsland.svelte';
 
 const autores = await getCollection("autores");
 
@@ -13,5 +14,6 @@ const items = autores;
   <h1 class="text-3xl font-bold mb-8 text-center">Personajes Chilenos</h1>
 
   <FiltroAutores client:load items={items} />
+  <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/_jdY3LCFZEdNxpzRIKCLL"/>
 
 </Layout>
