@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const autores = await getCollection("autores");
+
+import Chatbot from '../components/ChatbotIsland.svelte';
 ---
 
 <Layout title="Autores Chilenos">
@@ -25,4 +27,5 @@ const autores = await getCollection("autores");
       </div>
     ))}
   </div>
+  <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/_jdY3LCFZEdNxpzRIKCLL"/>
 </Layout>
