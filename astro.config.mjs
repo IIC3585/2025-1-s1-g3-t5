@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
+import vue from '@astrojs/vue';
 import tailwindcss from '@tailwindcss/vite';
 
 import svelte from '@astrojs/svelte';
@@ -15,5 +15,7 @@ export default defineConfig({
     enabled: true,
   },
 
-  integrations: [svelte()],
-});
+  integrations: [
+    vue(),
+    svelte()
+  ]

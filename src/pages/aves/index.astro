@@ -1,31 +1,18 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import FiltroAves from "../../components/vue/FiltroAves.vue";
 import Chatbot from "../../components/ChatbotIsland.svelte"
 
 const aves = await getCollection("aves");
+const items = aves;
 ---
 
 <Layout title="Aves Nativas">
   <h1 class="text-3xl font-bold mb-8 text-center">Aves Nativas</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {aves.map((ave) => (
-      <div>
-        <a href={`/aves/${ave.data.uid}`}>
-          <article class="rounded-xl border shadow hover:shadow-lg transition bg-white overflow-hidden p-4 text-center">
-            {ave.data.image && (
-              <img
-                src={ave.data.image}
-                alt={`Imagen de ${ave.data.spanishName}`}
-                class="w-full h-48 object-cover rounded-md mb-4"
-              />
-            )}
-            <h2 class="text-lg font-semibold text-gray-900">{ave.data.spanishName}</h2>
-          </article>
-        </a>
-      </div>
-    ))}
-  </div>
+
+  <FiltroAves client:load items={items} />
   <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/03twDtrAVdwFFtkGASzQW"/>
+
 
 </Layout>
