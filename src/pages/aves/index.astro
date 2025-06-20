@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import Chatbot from "../../components/ChatbotIsland.svelte"
 
 const aves = await getCollection("aves");
 ---
@@ -25,4 +26,6 @@ const aves = await getCollection("aves");
       </div>
     ))}
   </div>
+  <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/03twDtrAVdwFFtkGASzQW"/>
+
 </Layout>

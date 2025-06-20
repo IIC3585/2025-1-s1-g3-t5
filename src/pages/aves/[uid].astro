@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Chatbot from "../../components/ChatbotIsland.svelte"
 
 export async function getStaticPaths() {
   const aves = await getCollection("aves");
@@ -58,4 +59,6 @@ const {
       ← Volver
     </a>
   </div>
+  <Chatbot client:load chatbotlink="https://www.chatbase.co/chatbot-iframe/03twDtrAVdwFFtkGASzQW"/>
+
 </Layout>
