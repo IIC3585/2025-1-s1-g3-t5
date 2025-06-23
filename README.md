@@ -42,6 +42,8 @@ Se pueden probar los chatbots hechos en los siguientes enlaces:
 
 ### Aves
 - https://www.chatbase.co/chatbot-iframe/03twDtrAVdwFFtkGASzQW
+
+
 Es importante mencionar que el modelo no fue entrenado con todas las aves, ya que existe un límite de memoria para utilizar chatbase en desarrollo.
 
 ## Isla Vue (Filtro/Buscador)
